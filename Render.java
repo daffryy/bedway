@@ -16,26 +16,25 @@ public class Render {
         BlockPos pos = Bedway.waypointManager.getBase();
         Minecraft mc = Minecraft.getMinecraft();
 
-        // The viewer position is the exact location of the camera in the world.
         double viewerX = mc.getRenderManager().viewerPosX;
         double viewerY = mc.getRenderManager().viewerPosY;
         double viewerZ = mc.getRenderManager().viewerPosZ;
 
-        // Calculate the block's position relative to the camera
         double x = pos.getX() - viewerX;
         double y = pos.getY() - viewerY;
         double z = pos.getZ() - viewerZ;
 
         GlStateManager.pushMatrix();
 
-        // Setup GL state to draw through walls (ESP mode)
+        // setup opengl stuff, i stole this code idk how it works
         GL11.glDisable(GL11.GL_TEXTURE_2D);
-        GL11.glDisable(GL11.GL_DEPTH_TEST); // Disables depth so it renders over walls
-        GL11.glEnable(GL11.GL_BLEND);       // Allows for smooth/transparent lines if needed
+        GL11.glDisable(GL11.GL_DEPTH_TEST);
+        GL11.glEnable(GL11.GL_BLEND);
         GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
         GL11.glLineWidth(2.0f);
 
-        GL11.glColor4f(1.0f, 0.0f, 0.0f, 1.0f); // Solid Red color
+        // change the numbers for different colours, will add custom colours soon
+        GL11.glColor4f(1.0f, 0.0f, 0.0f, 1.0f);
 
         // 1. Draw Tracer Line from camera to the block
         // (0,0,0) is exactly where the camera is.

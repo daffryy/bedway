@@ -13,15 +13,20 @@ public class Bedway {
     @Mod.Instance(MODID)
     public static Bedway instance;
 
-    // Here we use your Waypoints class to manage the coordinates
     public static Waypoints waypointManager = new Waypoints();
 
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
-        // Register the rendering event
         MinecraftForge.EVENT_BUS.register(new Render());
-
-        // Register the CLIENT-SIDE command
         ClientCommandHandler.instance.registerCommand(new Commands());
+
+        NetworkHandler netHandler = new NetworkHandler();
+
+        MinecraftForge.EVENT_BUS.register(netHandler);
+
+        net.minecraftforge.fml.common.FMLCommonHandler.instance().bus().register(netHandler);
+        MinecraftForge.EVENT_BUS.register(netHandler);
+
+        net.minecraftforge.fml.common.FMLCommonHandler.instance().bus().register(netHandler);
     }
 }
